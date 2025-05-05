@@ -1,15 +1,21 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3.8.6-openjdk-11'
+            args '-v $HOME/.m2:/root/.m2'
+        }
+    }
     
     stages {
-        stage('Build and Test') {
+        stage('Build') {
             steps {
-                node {
-                    docker.image('maven:3.8.6-openjdk-11').inside('-v $HOME/.m2:/root/.m2') {
-                        sh 'mvn clean install -DskipTests'
-                        sh 'mvn test'
-                    }
-                }
+                sh 'mvn clean install -DskipTests'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                sh 'mvn test'
             }
             post {
                 always {
