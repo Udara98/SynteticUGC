@@ -9,6 +9,12 @@ on:
     - cron: '0 8 * * *'  # Runs at 8:00 AM every day
   workflow_dispatch:  # Allows manual triggering
 
+# Add permissions block
+permissions:
+  checks: write
+  pull-requests: write
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,4 +42,5 @@ jobs:
       if: always()
       with:
         report_paths: '**/target/surefire-reports/*.xml'
-        check_name: 'Test Results' 
+        check_name: 'Test Results'
+        github_token: ${{ secrets.GITHUB_TOKEN }} 
