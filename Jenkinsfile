@@ -14,6 +14,9 @@ pipeline {
             }
             post {
                 always {
+                    // Publish TestNG results
+                    publishTestNGResults '**/testng-results.xml'
+                    // Publish JUnit results (for compatibility)
                     junit '**/target/surefire-reports/*.xml'
                 }
             }

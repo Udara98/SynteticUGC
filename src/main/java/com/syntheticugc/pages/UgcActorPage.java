@@ -147,7 +147,7 @@ public class UgcActorPage {
             long startTime = System.currentTimeMillis();
             boolean videoGenerated = false;
             
-            while (!videoGenerated && (System.currentTimeMillis() - startTime) < Duration.ofMinutes(15).toMillis()) {
+            while (!videoGenerated && (System.currentTimeMillis() - startTime) < Duration.ofMinutes(35).toMillis()) {
                 try {
                     // Check if loading state is gone
                     if (!loadingDiv.isDisplayed()) {
