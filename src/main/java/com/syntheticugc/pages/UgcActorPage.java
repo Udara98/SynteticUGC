@@ -146,8 +146,10 @@ public class UgcActorPage {
             System.out.println("Waiting for video generation to complete...");
             long startTime = System.currentTimeMillis();
             boolean videoGenerated = false;
+            int staleElementCount = 0;
+            final int MAX_STALE_RETRIES = 10;
             
-            while (!videoGenerated && (System.currentTimeMillis() - startTime) < Duration.ofMinutes(35).toMillis()) {
+            while (!videoGenerated && (System.currentTimeMillis() - startTime) < Duration.ofMinutes(45).toMillis()) {
                 try {
                     // Check if loading state is gone
                     if (!loadingDiv.isDisplayed()) {
@@ -161,15 +163,20 @@ public class UgcActorPage {
                     }
                     // Wait a bit before checking again
                     try {
-                        Thread.sleep(5000); // Check every 5 seconds
+                        Thread.sleep(10000); // Check every 10 seconds instead of 5
                     } catch (InterruptedException ie) {
                         Thread.currentThread().interrupt();
                         throw new RuntimeException("Thread was interrupted while waiting for video generation", ie);
                     }
                     System.out.println("Still waiting for video generation...");
                 } catch (StaleElementReferenceException e) {
-                    // Element became stale, try to find it again
-                    System.out.println("Element became stale, refreshing...");
+                    staleElementCount++;
+                    System.out.println("Element became stale, refreshing... (Attempt " + staleElementCount + " of " + MAX_STALE_RETRIES + ")");
+                    
+                    if (staleElementCount >= MAX_STALE_RETRIES) {
+                        throw new RuntimeException("Too many stale element exceptions encountered", e);
+                    }
+                    
                     try {
                         loadingDiv = longWait.until(ExpectedConditions.presenceOfElementLocated(loadingStateDiv));
                     } catch (TimeoutException te) {
@@ -185,7 +192,7 @@ public class UgcActorPage {
             }
             
             if (!videoGenerated) {
-                throw new TimeoutException("Video generation did not complete within the expected time");
+                throw new TimeoutException("Video generation did not complete within the expected time (45 minutes)");
             }
             
             System.out.println("Video generation completed successfully");

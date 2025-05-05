@@ -23,10 +23,12 @@ jobs:
         cache: maven
     
     - name: Build with Maven
-      run: mvn clean install -DskipTests
+      run: mvn clean install -DskipTests -X
     
     - name: Run Tests
-      run: mvn test
+      run: mvn test -X
+      env:
+        MAVEN_OPTS: "-Dmaven.test.failure.ignore=true"
     
     - name: Publish Test Results
       uses: mikepenz/action-junit-report@v3

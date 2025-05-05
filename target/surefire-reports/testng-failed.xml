@@ -3,14 +3,14 @@
 <suite thread-count="1" name="Failed suite [Surefire suite]" verbose="0">
   <test thread-count="1" name="Surefire test(failed)" verbose="0">
     <classes>
-      <class name="com.syntheticugc.tests.UgcActorTest">
+      <class name="com.syntheticugc.tests.LipSyncTest">
         <methods>
+          <include name="setup"/>
           <include name="setUp"/>
           <include name="tearDown"/>
-          <include name="setup"/>
-          <include name="testGenerateUgcActor"/>
+          <include name="testLipSyncFunctionality"/>
         </methods>
-      </class> <!-- com.syntheticugc.tests.UgcActorTest -->
+      </class> <!-- com.syntheticugc.tests.LipSyncTest -->
     </classes>
   </test> <!-- Surefire test(failed) -->
 </suite> <!-- Failed suite [Surefire suite] -->
