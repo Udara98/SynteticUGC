@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SyntheticUGC Test Suite">
+    <!-- Login Test Configuration -->
+    <test name="Login Test">
+        <classes>
+            <class name="com.syntheticugc.tests.LoginTest"/>
+        </classes>
+    </test>
+
+    <!-- UGC Actor Test Configuration -->
+    <test name="UGC Actor Test">
+        <classes>
+            <class name="com.syntheticugc.tests.UgcActorTest"/>
+        </classes>
+    </test>
+
+    <!-- Lip Sync Test Configuration -->
+    <test name="Lip Sync Test">
+        <classes>
+            <class name="com.syntheticugc.tests.LipSyncTest"/>
+        </classes>
+    </test>
+</suite> 

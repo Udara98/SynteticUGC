@@ -1,0 +1,4 @@
+com\syntheticugc\pages\LipSyncPage.class
+com\syntheticugc\pages\LoginPage.class
+com\syntheticugc\base\BaseTest.class
+com\syntheticugc\pages\UgcActorPage.class
