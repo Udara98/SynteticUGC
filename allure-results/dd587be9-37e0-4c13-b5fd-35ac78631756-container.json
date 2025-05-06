@@ -1,0 +1,1 @@
+{"uuid":"dd587be9-37e0-4c13-b5fd-35ac78631756","name":"com.syntheticugc.tests.LipSyncTest","children":["bff81ca1-cf65-40f0-a80f-3327d6b919c4"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1746519811908,"stop":1746519811909}],"afters":[],"start":1746519811908,"stop":1746520142177}

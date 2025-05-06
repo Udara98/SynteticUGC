@@ -37,6 +37,40 @@ jobs:
       env:
         MAVEN_OPTS: "-Dmaven.test.failure.ignore=true"
     
+    - name: Generate Allure Report
+      run: mvn allure:report
+    
+    - name: Archive Allure Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: target/site/allure-maven-plugin/
+    
+    - name: Send Email Report
+      if: always()
+      run: |
+        # Create a temporary directory for the report
+        mkdir -p temp-report
+        
+        # Copy the Allure report to the temp directory
+        cp -r target/site/allure-maven-plugin/* temp-report/
+        
+        # Create a zip file of the report
+        cd temp-report
+        zip -r ../allure-report.zip .
+        cd ..
+        
+        # Send the email with the report
+        java -cp target/classes:target/test-classes com.syntheticugc.utils.EmailUtil \
+          "SyntheticUGC Test Report - $(date +'%Y-%m-%d %H:%M')" \
+          "<html><body><h1>SyntheticUGC Test Report</h1><p>Please find attached the Allure test report.</p></body></html>" \
+          allure-report.zip \
+          true
+      env:
+        EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        EMAIL_TO: ${{ secrets.EMAIL_TO }}
+    
     - name: Publish Test Results
       uses: mikepenz/action-junit-report@v3
       if: always()

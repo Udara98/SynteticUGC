@@ -1,0 +1,1 @@
+{"uuid":"16817cb0-380b-41ae-9141-9305f10bf048","name":"com.syntheticugc.tests.UgcActorTest","children":["ec6f8532-df6e-48ac-8c2e-05fec251c851"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1746517436934,"stop":1746517436934}],"afters":[],"start":1746517436923,"stop":1746518513686}
