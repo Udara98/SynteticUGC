@@ -22,7 +22,27 @@ public class EmailUtil {
     
     private static String getEmailTo() {
         return System.getenv("EMAIL_TO") != null ? 
-               System.getenv("EMAIL_TO") : "Jf@5S83xRn#D";
+               System.getenv("EMAIL_TO") : "udaraudawatte@gmail.com";
+    }
+
+    public static void main(String[] args) {
+        if (args.length < 3) {
+            System.out.println("Usage: java EmailUtil <subject> <body> <attachment_path> [isHtml]");
+            System.exit(1);
+        }
+
+        String subject = args[0];
+        String body = args[1];
+        String attachmentPath = args[2];
+        boolean isHtml = args.length > 3 && Boolean.parseBoolean(args[3]);
+
+        File attachment = new File(attachmentPath);
+        if (!attachment.exists()) {
+            System.err.println("Attachment file not found: " + attachmentPath);
+            System.exit(1);
+        }
+
+        sendTestReport(subject, body, new File[]{attachment}, isHtml);
     }
 
     public static void sendTestReport(String subject, String body, File[] attachments, boolean isHtml) {
