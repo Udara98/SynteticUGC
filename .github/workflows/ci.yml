@@ -41,12 +41,12 @@ jobs:
         mkdir -p src/test/resources
         echo "Created test resources directory"
     
-    - name: Copy Test Files
+    - name: Download and Copy Test Files
       run: |
-        # Copy local media files to test resources directory
-        cp src/test/resources/demo-audio.mp3 src/test/resources/
-        cp src/test/resources/video.mp4 src/test/resources/
-        echo "Copied local media files to test resources directory"
+        # Download media files
+        curl -L -o src/test/resources/demo-audio.mp3 https://example.com/path/to/demo-audio.mp3
+        curl -L -o src/test/resources/video.mp4 https://example.com/path/to/video.mp4
+        echo "Downloaded and saved media files to test resources directory"
     
     - name: Build with Maven
       run: mvn clean install -DskipTests -X
