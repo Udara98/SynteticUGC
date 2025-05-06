@@ -9,29 +9,17 @@ public class EmailUtil {
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
     
-    // Get email configuration from environment variables with fallback values
+    // Hardcoded email configuration
     private static String getEmailFrom() {
-        String email = System.getenv("EMAIL_FROM");
-        if (email == null || email.trim().isEmpty()) {
-            email = "contact.syntheticugc@gmail.com";
-        }
-        return email.trim();
+        return "contact.syntheticugc@gmail.com";
     }
     
     private static String getEmailPassword() {
-        String password = System.getenv("EMAIL_PASSWORD");
-        if (password == null || password.trim().isEmpty()) {
-            password = "Jf@5S83xRn#D";
-        }
-        return password.trim();
+        return "Jf@5S83xRn#D";
     }
     
     private static String getEmailTo() {
-        String email = System.getenv("EMAIL_TO");
-        if (email == null || email.trim().isEmpty()) {
-            email = "udaraudawatte@gmail.com";
-        }
-        return email.trim();
+        return "udaraudawatte@gmail.com";
     }
 
     private static void validateEmailAddress(String email) throws AddressException {

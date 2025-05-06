@@ -5,8 +5,8 @@
     <classes>
       <class name="com.syntheticugc.tests.LipSyncTest">
         <methods>
-          <include name="afterMethod"/>
           <include name="setup"/>
+          <include name="afterMethod"/>
           <include name="setUp"/>
           <include name="tearDown"/>
           <include name="beforeMethod"/>
