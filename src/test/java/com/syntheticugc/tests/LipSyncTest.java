@@ -5,6 +5,8 @@ import com.syntheticugc.pages.LipSyncPage;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.io.File;
+
 public class LipSyncTest extends BaseTest {
     private LipSyncPage lipSyncPage;
 
@@ -36,8 +38,24 @@ public class LipSyncTest extends BaseTest {
 
     @Test
     public void testLipSyncFunctionality() {
-        String audioFilePath = "C:\\Users\\udara\\Documents\\Testing\\demo-audio.mp3";
-        String videoFilePath = "C:\\Users\\udara\\Documents\\Testing\\video.mp4";
+        // Get the test resources directory
+        String resourcesDir = new File("src/test/resources").getAbsolutePath();
+        String audioFilePath = resourcesDir + File.separator + "demo-audio.mp3";
+        String videoFilePath = resourcesDir + File.separator + "video.mp4";
+        
+        // Verify test files exist
+        File audioFile = new File(audioFilePath);
+        File videoFile = new File(videoFilePath);
+        
+        if (!audioFile.exists()) {
+            throw new RuntimeException("Audio file not found at: " + audioFilePath + 
+                "\nPlease place demo-audio.mp3 in src/test/resources directory");
+        }
+        
+        if (!videoFile.exists()) {
+            throw new RuntimeException("Video file not found at: " + videoFilePath + 
+                "\nPlease place video.mp4 in src/test/resources directory");
+        }
         
         // Perform lip sync
         lipSyncPage.performLipSync(audioFilePath, videoFilePath);
