@@ -43,9 +43,10 @@ jobs:
     
     - name: Download Test Files
       run: |
-        # Download sample audio file (you can replace these URLs with your actual test files)
-        curl -L "https://github.com/actions/upload-artifact/raw/main/test/test-files/hello.txt" -o src/test/resources/demo-audio.mp3
-        curl -L "https://github.com/actions/upload-artifact/raw/main/test/test-files/hello.txt" -o src/test/resources/video.mp4
+        # Download test files from your secure storage
+        # Replace these URLs with your actual test file URLs
+        curl -L "${{ secrets.TEST_AUDIO_URL }}" -o src/test/resources/demo-audio.mp3
+        curl -L "${{ secrets.TEST_VIDEO_URL }}" -o src/test/resources/video.mp4
         echo "Downloaded test files"
     
     - name: Build with Maven
@@ -70,8 +71,11 @@ jobs:
     - name: Send Email Report
       if: always()
       run: |
+        # Get the classpath with all dependencies
+        CLASSPATH=$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)
+        
         # Send the email with the report
-        java -cp target/classes:target/test-classes com.syntheticugc.utils.EmailUtil \
+        java -cp "target/classes:target/test-classes:$CLASSPATH" com.syntheticugc.utils.EmailUtil \
           "SyntheticUGC Test Report - $(date +'%Y-%m-%d %H:%M')" \
           "<html><body><h1>SyntheticUGC Test Report</h1><p>Please find attached the Allure test report.</p></body></html>" \
           allure-report.zip \
