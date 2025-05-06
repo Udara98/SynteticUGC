@@ -29,6 +29,13 @@ jobs:
         distribution: 'temurin'
         cache: maven
     
+    - name: Cache Maven packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    
     - name: Build with Maven
       run: mvn clean install -DskipTests -X
     
@@ -39,6 +46,13 @@ jobs:
     
     - name: Generate Allure Report
       run: mvn allure:report
+    
+    - name: Cache Allure Report
+      uses: actions/cache@v3
+      with:
+        path: target/site/allure-maven-plugin
+        key: ${{ runner.os }}-allure-${{ github.sha }}
+        restore-keys: ${{ runner.os }}-allure-
     
     - name: Archive Allure Report
       uses: actions/upload-artifact@v3.1.3
