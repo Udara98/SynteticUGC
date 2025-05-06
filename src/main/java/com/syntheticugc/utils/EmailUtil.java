@@ -63,6 +63,17 @@ public class EmailUtil {
             validateEmailAddress(fromEmail);
             validateEmailAddress(toEmail);
 
+            // Check if we have any test reports
+            File surefireDir = new File("target/surefire-reports");
+            if (!surefireDir.exists() || surefireDir.listFiles() == null || surefireDir.listFiles().length == 0) {
+                System.out.println("No test reports found in target/surefire-reports directory");
+                body = "No test reports were generated. This could be because:\n" +
+                      "1. Tests were not executed\n" +
+                      "2. Tests failed before generating reports\n" +
+                      "3. Test reports directory is empty\n\n" +
+                      "Original message: " + body;
+            }
+
             Session session = Session.getInstance(props, new Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -96,6 +107,20 @@ public class EmailUtil {
                         multipart.addBodyPart(attachmentPart);
                     } else {
                         System.err.println("Warning: Attachment file not found: " + file.getAbsolutePath());
+                    }
+                }
+            }
+
+            // Add test report files if they exist
+            if (surefireDir.exists()) {
+                File[] reportFiles = surefireDir.listFiles((dir, name) -> 
+                    name.endsWith(".html") || name.endsWith(".xml") || name.endsWith(".txt"));
+                
+                if (reportFiles != null) {
+                    for (File report : reportFiles) {
+                        MimeBodyPart reportPart = new MimeBodyPart();
+                        reportPart.attachFile(report);
+                        multipart.addBodyPart(reportPart);
                     }
                 }
             }
