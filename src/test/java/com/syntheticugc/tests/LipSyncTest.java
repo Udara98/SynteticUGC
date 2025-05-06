@@ -3,8 +3,7 @@ package com.syntheticugc.tests;
 import com.syntheticugc.base.BaseTest;
 import com.syntheticugc.pages.LipSyncPage;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class LipSyncTest extends BaseTest {
     private LipSyncPage lipSyncPage;
@@ -13,6 +12,26 @@ public class LipSyncTest extends BaseTest {
     public void setup() {
         // Login is handled in BaseTest constructor
         lipSyncPage = new LipSyncPage(driver);
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+        // Clear browser cookies and cache before each test
+        driver.manage().deleteAllCookies();
+        // Refresh the page to ensure clean state
+        driver.navigate().refresh();
+        // Wait for page to load
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        // Clear any remaining state after test
+        driver.manage().deleteAllCookies();
     }
 
     @Test

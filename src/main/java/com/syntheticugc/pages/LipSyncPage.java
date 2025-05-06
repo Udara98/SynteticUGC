@@ -30,9 +30,35 @@ public class LipSyncPage {
     }
 
     public void clickLipSyncCard() {
-        WebElement card = wait.until(ExpectedConditions.presenceOfElementLocated(lipSyncCard));
-        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", card);
-        card.click();
+        try {
+            // Wait for the element to be present
+            WebElement card = wait.until(ExpectedConditions.presenceOfElementLocated(lipSyncCard));
+            
+            // Wait for the element to be visible
+            wait.until(ExpectedConditions.visibilityOf(card));
+            
+            // Scroll the element into view with offset
+            jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", card);
+            
+            // Add a small delay to allow smooth scrolling to complete
+            Thread.sleep(1000);
+            
+            // Wait for the element to be clickable
+            card = wait.until(ExpectedConditions.elementToBeClickable(lipSyncCard));
+            
+            // Try JavaScript click first
+            try {
+                jsExecutor.executeScript("arguments[0].click();", card);
+            } catch (Exception e) {
+                // If JavaScript click fails, try regular click
+                card.click();
+            }
+            
+            // Wait a bit for the click to take effect
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to click Lip Sync card: " + e.getMessage(), e);
+        }
     }
 
     private void waitForUploadToComplete() {

@@ -1,29 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-05-05T17:19:06 IST" name="Surefire suite" finished-at="2025-05-05T17:23:12 IST" duration-ms="245769">
+  <suite started-at="2025-05-06T12:03:53 IST" name="SyntheticUGC Test Suite" finished-at="2025-05-06T12:26:11 IST" duration-ms="1338183">
     <groups>
+      <group name="login">
+        <method signature="LoginTest.verifyLoginSuccessful()[pri:0, instance:com.syntheticugc.tests.LoginTest@76908cc0]" name="verifyLoginSuccessful" class="com.syntheticugc.tests.LoginTest"/>
+      </group> <!-- login -->
     </groups>
-    <test started-at="2025-05-05T17:19:06 IST" name="Surefire test" finished-at="2025-05-05T17:23:12 IST" duration-ms="245769">
-      <class name="com.syntheticugc.tests.LipSyncTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.syntheticugc.tests.LipSyncTest@7c417213]" started-at="2025-05-05T17:18:58 IST" name="setUp" finished-at="2025-05-05T17:19:06 IST" duration-ms="7393" status="PASS">
+    <test started-at="2025-05-06T12:03:53 IST" name="Login Test" finished-at="2025-05-06T12:03:53 IST" duration-ms="16">
+      <class name="com.syntheticugc.tests.LoginTest">
+        <test-method signature="verifyLoginSuccessful()[pri:0, instance:com.syntheticugc.tests.LoginTest@76908cc0]" started-at="2025-05-06T12:03:53 IST" name="verifyLoginSuccessful" finished-at="2025-05-06T12:03:53 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setup()[pri:0, instance:com.syntheticugc.tests.LipSyncTest@7c417213]" started-at="2025-05-05T17:19:06 IST" name="setup" finished-at="2025-05-05T17:19:06 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- verifyLoginSuccessful -->
+      </class> <!-- com.syntheticugc.tests.LoginTest -->
+    </test> <!-- Login Test -->
+    <test started-at="2025-05-06T12:03:53 IST" name="UGC Actor Test" finished-at="2025-05-06T12:21:50 IST" duration-ms="1077142">
+      <class name="com.syntheticugc.tests.UgcActorTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.syntheticugc.tests.UgcActorTest@7a69b07]" started-at="2025-05-06T12:03:53 IST" name="setup" finished-at="2025-05-06T12:03:53 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="testLipSyncFunctionality()[pri:0, instance:com.syntheticugc.tests.LipSyncTest@7c417213]" started-at="2025-05-05T17:19:06 IST" name="testLipSyncFunctionality" finished-at="2025-05-05T17:23:12 IST" duration-ms="245754" status="PASS">
+        <test-method signature="testGenerateUgcActor()[pri:0, instance:com.syntheticugc.tests.UgcActorTest@7a69b07]" started-at="2025-05-06T12:03:53 IST" name="testGenerateUgcActor" finished-at="2025-05-06T12:21:50 IST" duration-ms="1077139" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGenerateUgcActor -->
+      </class> <!-- com.syntheticugc.tests.UgcActorTest -->
+    </test> <!-- UGC Actor Test -->
+    <test started-at="2025-05-06T12:21:50 IST" name="Lip Sync Test" finished-at="2025-05-06T12:26:11 IST" duration-ms="261016">
+      <class name="com.syntheticugc.tests.LipSyncTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.syntheticugc.tests.LipSyncTest@4ac3c60d]" started-at="2025-05-06T12:03:46 IST" name="setUp" finished-at="2025-05-06T12:03:53 IST" duration-ms="6757" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.syntheticugc.tests.LipSyncTest@4ac3c60d]" started-at="2025-05-06T12:21:50 IST" name="setup" finished-at="2025-05-06T12:21:50 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.syntheticugc.tests.LipSyncTest@4ac3c60d]" started-at="2025-05-06T12:21:50 IST" name="beforeMethod" finished-at="2025-05-06T12:21:53 IST" duration-ms="2626" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testLipSyncFunctionality()[pri:0, instance:com.syntheticugc.tests.LipSyncTest@4ac3c60d]" started-at="2025-05-06T12:21:53 IST" name="testLipSyncFunctionality" finished-at="2025-05-06T12:26:11 IST" duration-ms="258377" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLipSyncFunctionality -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.syntheticugc.tests.LipSyncTest@7c417213]" started-at="2025-05-05T17:23:12 IST" name="tearDown" finished-at="2025-05-05T17:23:12 IST" duration-ms="149" status="PASS">
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:com.syntheticugc.tests.LipSyncTest@4ac3c60d]" started-at="2025-05-06T12:26:11 IST" name="afterMethod" finished-at="2025-05-06T12:26:11 IST" duration-ms="10" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.syntheticugc.tests.LipSyncTest@4ac3c60d]" started-at="2025-05-06T12:26:11 IST" name="tearDown" finished-at="2025-05-06T12:26:12 IST" duration-ms="189" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- com.syntheticugc.tests.LipSyncTest -->
-    </test> <!-- Surefire test -->
-  </suite> <!-- Surefire suite -->
+    </test> <!-- Lip Sync Test -->
+  </suite> <!-- SyntheticUGC Test Suite -->
 </testng-results>
