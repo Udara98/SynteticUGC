@@ -41,14 +41,14 @@ jobs:
       run: mvn allure:report
     
     - name: Archive Allure Report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3.1.3
       with:
         name: allure-report
         path: target/site/allure-maven-plugin/
         retention-days: 5
     
     - name: Download Allure Report
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v3.0.2
       with:
         name: allure-report
         path: temp-report
