@@ -45,16 +45,17 @@ jobs:
       with:
         name: allure-report
         path: target/site/allure-maven-plugin/
+        retention-days: 5
+    
+    - name: Download Allure Report
+      uses: actions/download-artifact@v3
+      with:
+        name: allure-report
+        path: temp-report
     
     - name: Send Email Report
       if: always()
       run: |
-        # Create a temporary directory for the report
-        mkdir -p temp-report
-        
-        # Copy the Allure report to the temp directory
-        cp -r target/site/allure-maven-plugin/* temp-report/
-        
         # Create a zip file of the report
         cd temp-report
         zip -r ../allure-report.zip .
