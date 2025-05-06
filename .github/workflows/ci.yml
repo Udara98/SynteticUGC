@@ -43,11 +43,21 @@ jobs:
     
     - name: Download Test Files
       run: |
-        # Download test files from your secure storage
-        # Replace these URLs with your actual test file URLs
-        curl -L "${{ secrets.TEST_AUDIO_URL }}" -o src/test/resources/demo-audio.mp3
-        curl -L "${{ secrets.TEST_VIDEO_URL }}" -o src/test/resources/video.mp4
-        echo "Downloaded test files"
+        # Create sample test files if secrets are not available
+        if [ -z "${{ secrets.TEST_AUDIO_URL }}" ] || [ -z "${{ secrets.TEST_VIDEO_URL }}" ]; then
+          echo "Test file URLs not provided, creating sample files..."
+          # Create a small MP3 file
+          echo "RIFF" > src/test/resources/demo-audio.mp3
+          # Create a small MP4 file
+          echo "ftyp" > src/test/resources/video.mp4
+          echo "Created sample test files"
+        else
+          # Download test files from secure storage
+          echo "Downloading test files from provided URLs..."
+          curl -L "${{ secrets.TEST_AUDIO_URL }}" -o src/test/resources/demo-audio.mp3
+          curl -L "${{ secrets.TEST_VIDEO_URL }}" -o src/test/resources/video.mp4
+          echo "Downloaded test files"
+        fi
     
     - name: Build with Maven
       run: mvn clean install -DskipTests -X
