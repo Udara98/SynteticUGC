@@ -47,34 +47,17 @@ jobs:
     - name: Generate Allure Report
       run: mvn allure:report
     
-    - name: Cache Allure Report
-      uses: actions/cache@v3
-      with:
-        path: target/site/allure-maven-plugin
-        key: ${{ runner.os }}-allure-${{ github.sha }}
-        restore-keys: ${{ runner.os }}-allure-
-    
-    - name: Archive Allure Report
-      uses: actions/upload-artifact@v3.1.3
-      with:
-        name: allure-report
-        path: target/site/allure-maven-plugin/
-        retention-days: 5
-    
-    - name: Download Allure Report
-      uses: actions/download-artifact@v3.0.2
-      with:
-        name: allure-report
-        path: temp-report
+    - name: Prepare Allure Report
+      run: |
+        mkdir -p temp-report
+        cp -r target/site/allure-maven-plugin/* temp-report/
+        cd temp-report
+        zip -r ../allure-report.zip .
+        cd ..
     
     - name: Send Email Report
       if: always()
       run: |
-        # Create a zip file of the report
-        cd temp-report
-        zip -r ../allure-report.zip .
-        cd ..
-        
         # Send the email with the report
         java -cp target/classes:target/test-classes com.syntheticugc.utils.EmailUtil \
           "SyntheticUGC Test Report - $(date +'%Y-%m-%d %H:%M')" \
