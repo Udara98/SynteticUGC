@@ -11,18 +11,34 @@ public class EmailUtil {
     
     // Get email configuration from environment variables with fallback values
     private static String getEmailFrom() {
-        return System.getenv("EMAIL_FROM") != null ? 
-               System.getenv("EMAIL_FROM") : "contact.syntheticugc@gmail.com";
+        String email = System.getenv("EMAIL_FROM");
+        if (email == null || email.trim().isEmpty()) {
+            email = "contact.syntheticugc@gmail.com";
+        }
+        return email.trim();
     }
     
     private static String getEmailPassword() {
-        return System.getenv("EMAIL_PASSWORD") != null ? 
-               System.getenv("EMAIL_PASSWORD") : "Jf@5S83xRn#D";
+        String password = System.getenv("EMAIL_PASSWORD");
+        if (password == null || password.trim().isEmpty()) {
+            password = "Jf@5S83xRn#D";
+        }
+        return password.trim();
     }
     
     private static String getEmailTo() {
-        return System.getenv("EMAIL_TO") != null ? 
-               System.getenv("EMAIL_TO") : "udaraudawatte@gmail.com";
+        String email = System.getenv("EMAIL_TO");
+        if (email == null || email.trim().isEmpty()) {
+            email = "udaraudawatte@gmail.com";
+        }
+        return email.trim();
+    }
+
+    private static void validateEmailAddress(String email) throws AddressException {
+        if (email == null || email.trim().isEmpty()) {
+            throw new AddressException("Email address cannot be empty");
+        }
+        new InternetAddress(email).validate();
     }
 
     public static void main(String[] args) {
@@ -52,17 +68,23 @@ public class EmailUtil {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
 
-        Session session = Session.getInstance(props, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(getEmailFrom(), getEmailPassword());
-            }
-        });
-
         try {
+            // Validate email addresses before proceeding
+            String fromEmail = getEmailFrom();
+            String toEmail = getEmailTo();
+            validateEmailAddress(fromEmail);
+            validateEmailAddress(toEmail);
+
+            Session session = Session.getInstance(props, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(fromEmail, getEmailPassword());
+                }
+            });
+
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(getEmailFrom()));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(getEmailTo()));
+            message.setFrom(new InternetAddress(fromEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject(subject);
 
             // Create the message body part
@@ -80,9 +102,13 @@ public class EmailUtil {
             // Add attachments
             if (attachments != null) {
                 for (File file : attachments) {
-                    MimeBodyPart attachmentPart = new MimeBodyPart();
-                    attachmentPart.attachFile(file);
-                    multipart.addBodyPart(attachmentPart);
+                    if (file.exists()) {
+                        MimeBodyPart attachmentPart = new MimeBodyPart();
+                        attachmentPart.attachFile(file);
+                        multipart.addBodyPart(attachmentPart);
+                    } else {
+                        System.err.println("Warning: Attachment file not found: " + file.getAbsolutePath());
+                    }
                 }
             }
 
@@ -90,8 +116,14 @@ public class EmailUtil {
             Transport.send(message);
             System.out.println("Test report email sent successfully!");
 
-        } catch (Exception e) {
+        } catch (AddressException e) {
+            System.err.println("Invalid email address: " + e.getMessage());
+            e.printStackTrace();
+        } catch (MessagingException e) {
             System.err.println("Failed to send test report email: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Unexpected error while sending test report email: " + e.getMessage());
             e.printStackTrace();
         }
     }
