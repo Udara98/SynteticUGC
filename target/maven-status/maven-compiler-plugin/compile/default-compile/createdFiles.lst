@@ -1,5 +1,8 @@
 com\syntheticugc\pages\LipSyncPage.class
 com\syntheticugc\pages\LoginPage.class
 com\syntheticugc\base\BaseTest.class
+com\syntheticugc\utils\ConfigManager.class
 com\syntheticugc\pages\UgcActorPage.class
 com\syntheticugc\tests\LipSyncTest.class
+com\syntheticugc\utils\EmailUtil$1.class
+com\syntheticugc\utils\EmailUtil.class

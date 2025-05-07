@@ -209,7 +209,7 @@ public class LipSyncPage {
                 jsExecutor.executeScript("arguments[0].style.opacity = '1'; arguments[0].style.visibility = 'visible'; arguments[0].style.display = 'block';", audioInput);
                 
                 // Wait for the element to be clickable with increased timeout
-                WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(60));
+                WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(180));
                 audioInput = longWait.until(ExpectedConditions.elementToBeClickable(audioUploadInput));
                 System.out.println("Audio upload input is clickable");
                 
@@ -234,6 +234,12 @@ public class LipSyncPage {
                 // Wait for upload to complete with increased timeout
                 waitForUploadToComplete();
                 
+                // Wait 2 minutes after audio upload
+                try {
+                    Thread.sleep(120000);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
                 // Verify upload success
                 try {
                     WebElement successIndicator = driver.findElement(uploadCompleteIndicator);
@@ -266,6 +272,12 @@ public class LipSyncPage {
                         
                         waitForUploadToComplete();
                         
+                        // Wait 2 minutes after audio upload
+                        try {
+                            Thread.sleep(120000);
+                        } catch (InterruptedException ie) {
+                            Thread.currentThread().interrupt();
+                        }
                         // Switch back to main document
                         driver.switchTo().defaultContent();
                         return;
@@ -345,6 +357,12 @@ public class LipSyncPage {
                 // Wait for upload to complete with increased timeout
                 waitForUploadToComplete();
                 
+                // Wait 2 minutes after video upload
+                try {
+                    Thread.sleep(120000);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
                 // Verify upload success
                 try {
                     WebElement successIndicator = driver.findElement(uploadCompleteIndicator);
@@ -381,6 +399,12 @@ public class LipSyncPage {
                         
                         waitForUploadToComplete();
                         
+                        // Wait 2 minutes after video upload
+                        try {
+                            Thread.sleep(120000);
+                        } catch (InterruptedException ie) {
+                            Thread.currentThread().interrupt();
+                        }
                         // Switch back to main document
                         driver.switchTo().defaultContent();
                         return;

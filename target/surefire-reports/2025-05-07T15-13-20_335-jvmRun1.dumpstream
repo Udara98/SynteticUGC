@@ -1,0 +1,57 @@
+# Created at 2025-05-07T16:09:06.804
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: DEFAULT
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:386)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+
+# Created at 2025-05-07T16:09:11.612
+Unexpected IOException with stream: Still waiting for video generation...
+
+
+# Created at 2025-05-07T16:09:11.612
+Unexpected IOException with stream: Checking for video output...
+
+
+# Created at 2025-05-07T16:09:11.629
+Unexpected IOException with stream: Creation placeholder is still visible - video not ready
+
+
+# Created at 2025-05-07T16:09:21.640
+Unexpected IOException with stream: Still waiting for video generation...
+
+
+# Created at 2025-05-07T16:09:21.640
+Unexpected IOException with stream: Checking for video output...
+
+
+# Created at 2025-05-07T16:09:21.653
+Unexpected IOException with stream: Creation placeholder is still visible - video not ready
+
+
+# Created at 2025-05-07T16:09:31.668
+Unexpected IOException with stream: Still waiting for video generation...
+
+
+# Created at 2025-05-07T16:09:31.668
+Unexpected IOException with stream: Checking for video output...
+
+
+# Created at 2025-05-07T16:09:31.683
+Unexpected IOException with stream: Creation placeholder is still visible - video not ready
+
+
+# Created at 2025-05-07T16:09:41.696
+Unexpected IOException with stream: Still waiting for video generation...
+
+
+# Created at 2025-05-07T16:09:41.696
+Unexpected IOException with stream: Checking for video output...
+
+
+# Created at 2025-05-07T16:09:41.712
+Unexpected IOException with stream: Creation placeholder is still visible - video not ready
+
+

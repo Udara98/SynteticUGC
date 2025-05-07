@@ -18,7 +18,7 @@ public class UgcActorPage {
     private final By scriptInput = By.cssSelector("textarea[placeholder*='charismatic']");
     private final By sparklesIcon = By.cssSelector("svg.lucide-sparkles");
     private final By generateActorButton = By.cssSelector("button.px-8.min-w-\\[180px\\]");
-    private final By loadingStateDiv = By.xpath("//div[contains(@class, 'absolute') and contains(@class, 'inset-0')]//p[contains(text(), 'AI Video Generation')]");
+    private final By loadingStateDiv = By.xpath("//div[contains(@class, 'absolute') and contains(@class, 'inset-0')]//p[contains(text(), 'AI Video Generation') or contains(text(), 'Generating')]");
     private final By videoOutputDiv = By.xpath("//div[contains(@class, 'rounded-2xl') and .//video]");
     private final By videoElement = By.tagName("video");
     private final By downloadButton = By.xpath("//button[.//*[contains(@class, 'lucide-download')]]");
@@ -101,9 +101,14 @@ public class UgcActorPage {
 
     public boolean isLoadingStateDisplayed() {
         try {
-            WebElement loadingDiv = wait.until(ExpectedConditions.presenceOfElementLocated(loadingStateDiv));
-            return loadingDiv.isDisplayed();
+            System.out.println("Checking for loading state...");
+            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebElement loadingDiv = shortWait.until(ExpectedConditions.presenceOfElementLocated(loadingStateDiv));
+            boolean isDisplayed = loadingDiv.isDisplayed();
+            System.out.println("Loading state found and displayed: " + isDisplayed);
+            return isDisplayed;
         } catch (TimeoutException e) {
+            System.out.println("Loading state not found within timeout: " + e.getMessage());
             return false;
         }
     }

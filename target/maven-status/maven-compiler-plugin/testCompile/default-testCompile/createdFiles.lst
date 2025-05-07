@@ -1,3 +1,4 @@
+com\syntheticugc\base\BaseTest.class
+com\syntheticugc\tests\UgcActorTest.class
 com\syntheticugc\tests\LipSyncTest.class
 com\syntheticugc\tests\LoginTest.class
-com\syntheticugc\tests\UgcActorTest.class

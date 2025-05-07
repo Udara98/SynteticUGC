@@ -9,14 +9,14 @@
     </test>
 
     <!-- UGC Actor Test Configuration -->
-    <test name="UGC Actor Test">
+    <test name="UGC Actor Test" dependsOnGroups="login">
         <classes>
             <class name="com.syntheticugc.tests.UgcActorTest"/>
         </classes>
     </test>
 
     <!-- Lip Sync Test Configuration -->
-    <test name="Lip Sync Test">
+    <test name="Lip Sync Test" dependsOnGroups="login">
         <classes>
             <class name="com.syntheticugc.tests.LipSyncTest"/>
         </classes>
